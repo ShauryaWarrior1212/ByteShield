@@ -1,0 +1,198 @@
+/* Base styles for register page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #141e30, #00ffff);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+.register-box {
+    position: relative;
+    padding: 20px; /* Reduced padding for a more compact design */
+    width: 300px; /* Adjusted width */
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.register-box h2 {
+    margin-bottom: 20px; /* Reduced margin */
+    color: #00ffff;
+    font-weight: bold;
+    font-size: 1.5rem; /* Adjusted font size */
+    animation: slideIn 1s ease-in-out;
+}
+
+.register-box .user-box {
+    position: relative;
+    margin-bottom: 15px; /* Adjusted spacing */
+}
+
+.register-box input {
+    width: 100%;
+    padding: 8px 0; /* Reduced padding */
+    font-size: 14px; /* Reduced font size */
+    color: #fff;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #00ffff; /* Reduced line size */
+    outline: none;
+    box-shadow: none; /* Remove any shadow if present */
+}
+
+.register-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 8px 0; /* Match padding with input */
+    font-size: 14px; /* Reduced font size */
+    color: #00ffff;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.register-box input:focus~label,
+.register-box input:valid~label {
+    top: -20px;
+    left: 0;
+    color: #00ffff;
+    font-size: 12px;
+}
+
+.submit-button {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #00ffff;
+    font-size: 14px; /* Reduced font size */
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-top: 20px; /* Adjusted margin */
+    letter-spacing: 2px; /* Reduced letter spacing */
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: #00ffff;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #00ffff, 0 0 25px #00ffff, 0 0 50px #00ffff, 0 0 100px #00ffff;
+}
+
+.submit-button span {
+    position: absolute;
+    display: block;
+}
+
+.submit-button span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ffff);
+    animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
+    }
+    50%,
+    100% {
+        left: 100%;
+    }
+}
+
+.submit-button span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #00ffff);
+    animation: btn-anim2 1s linear infinite;
+    animation-delay: 0.25s;
+}
+
+@keyframes btn-anim2 {
+    0% {
+        top: -100%;
+    }
+    50%,
+    100% {
+        top: 100%;
+    }
+}
+
+.submit-button span:nth-child(3) {
+    bottom: 0;
+    right: 100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg, transparent, #00ffff);
+    animation: btn-anim3 1s linear infinite;
+    animation-delay: 0.5s;
+}
+
+@keyframes btn-anim3 {
+    0% {
+        right: -100%;
+    }
+    50%,
+    100% {
+        right: 100%;
+    }
+}
+
+.submit-button span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #00ffff);
+    animation: btn-anim4 1s linear infinite;
+    animation-delay: 0.75s;
+}
+
+@keyframes btn-anim4 {
+    0% {
+        bottom: -100%;
+    }
+    50%,
+    100% {
+        bottom: 100%;
+    }
+}
+
+/* Error message styling */
+.error-message {
+    margin-top: 1rem;
+    color: #e74c3c;
+    font-size: 0.9rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Login message styling */
+.login-message {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #00ffff;
+}
+
+.login-message a {
+    color: #00ffff;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.login-message a:hover {
+    color: #00ffff;
+}
