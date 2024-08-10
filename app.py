@@ -3,6 +3,7 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import logging
 from datetime import timedelta
+import requests
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # For flashing messages
@@ -99,6 +100,10 @@ def dashboard():
         return render_template('dashboard.html', username=session['username'], email=session['email'])
     else:
         return redirect(url_for('index'))
+    
+@app.route('/tools')
+def tools_page():
+    return render_template('tools.html')
 
 @app.route('/profile')
 def profile():
@@ -118,6 +123,27 @@ def settings():
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
+@app.route('/detect_ip')
+def detect_ip():
+    try:
+        response = requests.get('http://ipinfo.io/json')  # Use your chosen IP API
+        data = response.json()
+        return jsonify({
+            'IP': data.get('ip'),
+            'City': data.get('city'),
+            'Region': data.get('region'),
+            'Country': data.get('country'),
+            'Timezone': data.get('timezone'),
+            'ISP': data.get('org')  # 'org' usually contains the ISP name
+        })
+    except Exception as e:
+        logging.error('Error fetching IP details: %s', e)
+        return jsonify({'message': 'An error occurred while fetching IP details'}), 500
+
+@app.route('/ip_detector')
+def ip_detector():
+    return render_template('detect_ip.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
