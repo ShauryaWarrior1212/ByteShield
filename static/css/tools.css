@@ -54,27 +54,154 @@ body {
     z-index: 1; /* Ensure it is above the video and overlay */
 }
 
-.content {
+.container {
     position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 20px;
-}
-
-.button {
-    display: inline-flex;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 10px 20px;
-    margin-top: 20px;
-    background-color: #00bcd4;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    font-family: sans-serif; /* Match the font family */
 }
 
-.button ion-icon {
-    margin-right: 10px; /* Space between icon and text */
-    font-size: 1.5em; /* Size of the icon */
+/* Ensure the menu container is centered */
+.menu-container {
+    position: relative;
+    width: 100%; /* Adjust as needed */
+    height: 100%; /* Adjust as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style and center the menu */
+.menu {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s;
+}
+
+/* Hide icons initially */
+.menu li {
+    position: absolute;
+    list-style: none;
+    transform: rotate(0deg) translateX(100px);
+    transform-origin: center;
+    transition: transform 0.5s, opacity 0.5s;
+    opacity: 0; /* Hidden by default */
+}
+
+/* Activate the menu and spread icons */
+.menu.active li {
+    opacity: 1; /* Show icons */
+    transform: rotate(calc(360deg / 8 * var(--i))) translateX(100px);
+}
+
+/* Style the icon links */
+.menu a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    text-decoration: none;
+    font-size: 22px;
+    border-radius: 50%;
+    background: #007bff; /* Button color */
+    color: white;
+    transition: background 0.5s, filter 0.5s; /* Include filter in transition */
+    filter: drop-shadow(0 0 2px rgba(0,0,0,0.5));
+    position: relative; /* Ensure icons are positioned relative to the link */
+    z-index: 2; /* Ensure the icons are on top of the menu items */
+}
+
+/* Apply neon light effect on hover */
+.menu a:hover {
+    filter: drop-shadow(0 0 10px #00faff) brightness(1.2); /* Neon blue light effect */
+}
+
+/* Style the icon links when active */
+.menu.active a {
+    background: #0056b3; /* Active color */
+}
+
+/* Ensure the icon itself is on top of the button */
+.menu a i {
+    position: relative; /* Ensure the icon is above the button */
+    z-index: 3; /* Make sure the icon is above the button */
+}
+
+/* Animation for icons */
+.menu a::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(0,0,0,0.5);
+    transform: rotate(calc(90deg * var(--i))) translate(0, 25px);
+    transition: width 0.5s, height 0.5s, transform 0.5s;
+}
+
+.menu.active a::before {
+    width: 50px;
+    height: 50px;
+    background: #161616;
+    border: 2px solid #007bff;
+    transform: rotate(0deg);
+    border-radius: 10px;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+}
+
+/* Style the central button */
+.menuToggle {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 32px;
+    background-color: #007bff; /* Button color */
+    transition: transform 1.5s;
+}
+
+.menu.active .menuToggle {
+    transform: rotate(315deg);
+}
+
+/* Style for tooltips */
+.menu a {
+    position: relative; /* Required for tooltip positioning */
+}
+
+/* Hidden by default */
+.menu a::after {
+    content: attr(title); /* Tooltip text */
+    position: absolute;
+    bottom: 100%; /* Position above the icon */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.75); /* Dark background */
+    color: #fff; /* White text */
+    border-radius: 5px;
+    white-space: nowrap; /* Prevent text wrapping */
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Hidden by default */
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 4; /* Ensure tooltip is above the icons */
+}
+
+/* Show tooltip on hover */
+.menu a:hover::after {
+    opacity: 1;
+    visibility: visible;
 }
