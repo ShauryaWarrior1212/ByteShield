@@ -152,5 +152,37 @@ def detect_ip():
 def ip_detector():
     return render_template('detect_ip.html')
 
+@app.route('/ip_tracker')
+def ip_tracker():
+    return render_template('ip_tracker.html')
+
+@app.route('/track_ip', methods=['POST'])
+def track_ip():
+    ip = request.form.get('ip')
+    url = f"http://ip-api.com/json/{ip}"
+    
+    try:
+        response = requests.get(url)
+        data = response.json()
+        
+        if data['status'] == 'fail':
+            return jsonify({'error': data['message']})
+        
+        return jsonify({
+            'IP': data['query'],
+            'City': data['city'],
+            'Region': data['regionName'],
+            'Country': data['country'],
+            'Country Code': data['countryCode'],
+            'Timezone': data['timezone'],
+            'ISP': data['isp'],
+            'Org': data['org'],
+            'AS': data['as'],
+            'Lat': data['lat'],
+            'Lon': data['lon']
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
 if __name__ == '__main__':
     app.run(debug=True)

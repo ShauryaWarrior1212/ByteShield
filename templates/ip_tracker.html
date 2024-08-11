@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='ip-tracker/ip_tracker_styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="tracker">
+            <h1>IP Tracker</h1>
+            <input type="text" id="ipInput" placeholder="Enter IP address">
+            <button id="trackBtn">Track IP</button>
+            <div id="result"></div>
+        </div>
+        <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='ip-tracker/ip_tracker_script.js') }}"></script>
+</body>
+</html>
