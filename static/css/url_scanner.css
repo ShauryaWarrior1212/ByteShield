@@ -1,0 +1,113 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #000000, #00ffff); /* Black to aqua gradient background */
+    color: #00ffff; /* Bright aqua text color */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensure body covers full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container */
+.container {
+    width: 60%; /* Keep a reasonable width */
+    max-width: 400px; /* Optional: Set a maximum width to ensure it doesn't stretch too much */
+    padding: 40px; /* Adjust padding for better space inside */
+    background: rgba(0, 255, 255, 0.1); /* Very light aqua with 10% opacity for high transparency */
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 255, 255, 0.1); /* Increased shadow for more depth */
+    border: 2px solid rgba(0, 255, 255, 0.2); /* Very light aqua border */
+    position: relative;
+    overflow: hidden;
+    text-align: center; /* Center text alignment for a balanced look */
+    margin: 20px auto; /* Center the container horizontally with some vertical margin */
+}
+
+/* Header */
+h1 {
+    color: #ffffff; /* Slightly darker aqua color for the header */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Header Glow */
+h1::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: rgba(0, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(10px);
+    z-index: -1;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Input Fields */
+input[type="text"] {
+    padding: 15px;
+    border: 2px solid #00ffff; /* Bright aqua border */
+    border-radius: 8px;
+    font-size: 1.1em;
+    box-shadow: inset 0 2px 5px rgba(0, 255, 255, 0.3); /* Aqua inner shadow */
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #00bcd4; /* Darker aqua border on focus */
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5); /* Aqua glow effect */
+    outline: none;
+}
+
+/* Submit Button */
+input[type="submit"] {
+    padding: 15px;
+    background: #00ffff; /* Bright aqua button background */
+    color: black; /* Text color for contrast */
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    position: relative; /* Needed for the neon effect */
+    overflow: hidden; /* To clip the pseudo-element overflow */
+}
+
+/* Neon Glow Effect */
+input[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: rgba(0, 255, 255, 0.8); /* Semi-transparent neon aqua */
+    border-radius: 50%;
+    filter: blur(15px); /* Blurring effect for neon glow */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease; /* Smooth transition for glow */
+    z-index: -1; /* Place it behind the button text */
+}
+
+/* Hover Effect */
+input[type="submit"]:hover {
+    background: #00bcd4; /* Darker aqua on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+input[type="submit"]:hover::before {
+    opacity: 1; /* Show the neon glow on hover */
+}

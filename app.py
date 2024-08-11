@@ -4,9 +4,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import logging
 from datetime import timedelta
 import requests
+import base64
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # For flashing messages
+# VirusTotal API URL and API key
+API_URL = 'https://www.virustotal.com/api/v3/urls'
+API_KEY = '0e2137eaa2a2395599cf8a67f5ed8fe2503bf60d81085b412d4df15b6968e6df'
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -100,7 +104,7 @@ def dashboard():
         return render_template('dashboard.html', username=session['username'], email=session['email'])
     else:
         return redirect(url_for('index'))
-    
+
 @app.route('/tools')
 def tools_page():
     return render_template('tools.html')
@@ -147,7 +151,6 @@ def detect_ip():
         logging.error('Error fetching IP details: %s', e)
         return jsonify({'message': 'An error occurred while fetching IP details'}), 500
 
-
 @app.route('/ip_detector')
 def ip_detector():
     return render_template('detect_ip.html')
@@ -183,6 +186,48 @@ def track_ip():
         })
     except Exception as e:
         return jsonify({'error': str(e)})
+
+@app.route('/url_scanner')
+def url_scanner():
+    return render_template('url_scanner.html')
+
+@app.route('/scan', methods=['POST'])
+def scan():
+    try:
+        data = request.get_json()
+        url = data.get('url')
+        result = check_url_safety(url)
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+def check_url_safety(url):
+    headers = {
+        'x-apikey': API_KEY,
+    }
+
+    # Encode URL for the API request
+    encoded_url = base64.urlsafe_b64encode(url.encode()).decode().strip("=")
+    full_url = f'{API_URL}/{encoded_url}'
+
+    try:
+        response = requests.get(full_url, headers=headers)
+        response.raise_for_status()
+        status = response.json()
+        print(f"API Response: {status}")  # Debug: Print API response
+
+        # Adjust according to actual API response
+        if 'data' in status and 'attributes' in status['data']:
+            last_analysis_stats = status['data']['attributes']['last_analysis_stats']
+            if last_analysis_stats['malicious'] > 0:
+                return {'safe': False}
+            else:
+                return {'safe': True}
+        else:
+            return {'safe': False}
+    except requests.RequestException as e:
+        print(f"Error: {e}")  # Debug: Print the exception
+        return {'error': str(e)}
 
 if __name__ == '__main__':
     app.run(debug=True)
