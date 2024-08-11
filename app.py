@@ -127,15 +127,20 @@ def logout():
 @app.route('/detect_ip')
 def detect_ip():
     try:
-        response = requests.get('http://ipinfo.io/json')  # Use your chosen IP API
+        # Get the client's IP address
+        ip_address = request.headers.get('X-Forwarded-For', request.remote_addr)
+        
+        # Use an API like ipinfo.io to get more details about the IP address
+        response = requests.get(f'http://ipinfo.io/{ip_address}/json')
         data = response.json()
+
         return jsonify({
-            'IP': data.get('ip'),
+            'IP': data.get('ip', ip_address),
             'City': data.get('city'),
             'Region': data.get('region'),
             'Country': data.get('country'),
             'Timezone': data.get('timezone'),
-            'ISP': data.get('org')  # 'org' usually contains the ISP name
+            'ISP': data.get('org')
         })
     except Exception as e:
         logging.error('Error fetching IP details: %s', e)
