@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Threat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hackmap_styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <!-- Dashboard content -->
+    <div id="dashboard">
+        <h1>Live Threat Dashboard</h1>
+
+        <div id="summary">
+            <h2>Total Attacks Today: <span id="attack-count">0</span></h2>
+        </div>
+
+        <div id="map"></div>
+
+        <div id="graph-container">
+            <h2>Attacks Over Time</h2>
+            <canvas id="attackChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Audio element for attack sound -->
+    <audio id="attack-sound" src="{{ url_for('static', filename='sounds/attack-sound.mp3') }}" preload="auto"></audio>
+
+    <script src="{{ url_for('static', filename='js/hackmap_script.js') }}"></script>
+</body>
+</html>

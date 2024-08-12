@@ -4,6 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import logging
 from datetime import timedelta
 import requests
+import random
+import time
 import base64
 
 app = Flask(__name__)
@@ -228,6 +230,28 @@ def check_url_safety(url):
     except requests.RequestException as e:
         print(f"Error: {e}")  # Debug: Print the exception
         return {'error': str(e)}
+
+@app.route('/hackmap')
+def hackmap():
+    return render_template('hackmap.html')
+
+@app.route('/get-attack-data', methods=['GET'])
+def get_attack_data():
+    # Simulate the number of attacks and data over time
+    current_time = time.strftime('%H:%M:%S')
+    attacks_today = random.randint(100, 150)
+    attack_data = {
+        'attack_count': attacks_today,
+        'graph_data': {
+            'time': current_time,
+            'attacks': random.randint(1, 10)
+        },
+        'locations': [
+            {'lat': random.uniform(-90, 90), 'lng': random.uniform(-180, 180), 'time': current_time, 'severity': random.choice(['Low', 'Medium', 'High'])}
+            for _ in range(random.randint(1, 5))
+        ]
+    }
+    return jsonify(attack_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
