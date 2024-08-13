@@ -6,6 +6,8 @@ from datetime import timedelta
 import requests
 import random
 import time
+import os
+import nmap
 import base64
 
 app = Flask(__name__)
@@ -252,6 +254,39 @@ def get_attack_data():
         ]
     }
     return jsonify(attack_data)
+
+@app.route('/network_vulnerability_analyzer')
+def network_vulnerability_analyzer():
+    return render_template('network_vulnerability_analyzer.html')
+
+@app.route('/network_scan', methods=['POST'])
+def network_scan():
+    target = request.form.get('target')  # Use .get() to avoid KeyError
+    nm = nmap.PortScanner()
+
+    try:
+        # Run the scan
+        scan_result = nm.scan(hosts=target, arguments='-sS')
+        host = list(scan_result['scan'].keys())[0]
+
+        if 'scan' in scan_result and host in scan_result['scan']:
+            result = f"Host: {host}\n"
+            result += f"State: {scan_result['scan'][host]['status']['state']}\n\n"
+
+            # Display only open ports with their services
+            for proto in nm[host].all_protocols():
+                ports = nm[host][proto].keys()
+                for port in ports:
+                    port_info = nm[host][proto][port]
+                    if port_info['state'] == 'open':
+                        result += f"Port: {port}\tState: {port_info['state']}\tService: {port_info['name']}\n"
+        else:
+            result = "No open ports found or host seems down."
+
+    except Exception as e:
+        result = f"Error: {str(e)}"
+
+    return render_template('network_vulnerability_analyzer_results.html', result=result)
 
 if __name__ == '__main__':
     app.run(debug=True)
