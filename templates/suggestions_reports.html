@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggestions / Reports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/suggestions_reports.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Suggestions / Reports</h1>
+        <form action="/suggestions_reports" method="POST">
+            <div>
+                <label for="suggestion">Suggestion:</label>
+                <textarea id="suggestion" name="suggestion" rows="4" cols="50"></textarea>
+            </div>
+            <div>
+                <label for="report">Report an Issue:</label>
+                <textarea id="report" name="report" rows="4" cols="50"></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

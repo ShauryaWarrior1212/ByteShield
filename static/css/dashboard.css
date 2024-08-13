@@ -1,188 +1,210 @@
 * {
-    padding: 0;
-    margin: 0;
-  }
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: #161616;
-  }
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #161616;
+}
 
 .video-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Ensure the video is behind other content */
-    overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
 }
 
 #bgVideo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the video covers the entire screen */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 header {
-    position: fixed; /* Fix the header to stay in place */
-    top: 0; /* Align the header to the top */
-    left: 0; /* Align the header to the left */
-    padding: 20px; /* Adjust padding as needed */
-    width: 100%; /* Ensure the header spans the full width */
-    background: transparent; /* Set background to transparent */
-    z-index: 1000; /* Ensure the header is above other content */
-    display: flex;
-    justify-content: flex-start; /* Align children to the left */
-    align-items: flex-start; /* Align children to the top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  width: 100%;
+  background: transparent;
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .logo {
-    position: relative; /* Adjust positioning if needed */
-    top: -85px; /* Distance from the top of the header */
-    left: -70px; /* Distance from the left of the header */
-    max-width: 250px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    background: transparent; /* Ensure no background */
-}
-
-header h1 {
-    margin: 0;
-    color: #ffffff; /* Darker text color for contrast */
-    text-shadow: 1px 1px 2px #000; /* Add text shadow for better readability */
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center; /* Centering navigation items */
-}
-
-nav li {
-    margin: 0 15px; /* Spacing between navigation items */
-}
-
-nav a {
-    text-decoration: none;
-    color: #007bff; /* Link color to match the theme */
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-nav a:hover {
-    background-color: #007bff;
-    color: #fff;
-}
-
-main {
-    margin-top: 20px;
-}
-
-section {
-    margin-bottom: 20px;
-}
-
-section h2 {
-    border-bottom: 2px solid #007bff; /* Border color similar to login button */
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    color: #333; /* Darker text color for contrast */
-    text-shadow: 1px 1px 2px #000; /* Add text shadow for better readability */
-}
-
-.error-message {
-    color: red;
-    text-align: center;
-    margin: 20px 0;
+  position: relative;
+  top: -85px;
+  left: -70px;
+  max-width: 250px;
+  height: auto;
+  background: transparent;
 }
 
 .menu {
-    position: relative;
-    width: 260px;
-    height: 260px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .menu li {
-    position: absolute;
-    left: 0;
-    list-style: none;
-    transform: rotate(0deg) translateX(100px);
-    transform-origin: 130px;
-    transition: 0.5s;
-    transition-delay: calc(0.1s * var(--i));
-  }
-  .menu.active li {
-    transform: rotate(calc(360deg / 8 * var(--i)));
-  }
-  .menu a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    text-decoration: none;
-    font-size: 22px;
-    border-radius: 50%;
-    transform: rotate(calc(360deg / -8 * var(--i)));
-    transition: 1s;
-    color: transparent;
-    transition-delay: 0.5s;
-    filter: drop-shadow(0 0 2px var(--clr));
-  }
-  .menu.active a {
-    color: var(--clr);
-  }
-  .menu a::before {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 2px;
-    border-radius: 2px;
-    background: var(--clr);
-    transform: rotate(calc(90deg * var(--i))) translate(0, 25px);
-    transition: width 0.5s, height 0.5s, transform 0.5s;
-    transition-delay: 0.5s, 1s, 1.5s;
-  }
-  .menu.active a::before {
-    width: 50px;
-    height: 50px;
-    background: #161616;
-    border: 2px solid var(--clr);
-    transform: rotate(calc(0 * var(--i)));
-    transition: transform 0.5s, height 0.5s, width 0.5s;
-    transition-delay: 0.5s, 1.5s, 1.5s;
-    border-radius: 10px;
-    filter: drop-shadow(0 0 5px var(--clr));
-    rotate: 135deg;
-  }
-  .menu.active li:hover a::before {
-    background: var(--clr);
-  }
-  .menu.active li:hover a ion-icon {
-    color: #161616;
-  }
-  
-  .menuToggle {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 32px;
-    transition: 1.5s;
-  }
-  .menu.active .menuToggle {
-    transform: rotate(315deg);
-  }
+  position: relative;
+  width: 260px;
+  height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu li {
+  position: absolute;
+  left: 0;
+  list-style: none;
+  transform: rotate(0deg) translateX(100px);
+  transform-origin: 130px;
+  transition: 0.5s;
+  transition-delay: calc(0.1s * var(--i));
+  display: inline-block;
+}
+
+.menu.active li {
+  transform: rotate(calc(360deg / 8 * var(--i)));
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  text-decoration: none;
+  font-size: 22px;
+  border-radius: 50%;
+  transform: rotate(calc(360deg / -8 * var(--i)));
+  transition: 1s;
+  color: transparent;
+  transition-delay: 0.5s;
+  filter: drop-shadow(0 0 2px var(--clr));
+}
+
+.menu.active a {
+  color: var(--clr);
+}
+
+.menu a::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--clr);
+  transform: rotate(calc(90deg * var(--i))) translate(0, 25px);
+  transition: width 0.5s, height 0.5s, transform 0.5s;
+  transition-delay: 0.5s, 1s, 1.5s;
+}
+
+.menu.active a::before {
+  width: 50px;
+  height: 50px;
+  background: #161616;
+  border: 2px solid var(--clr);
+  transform: rotate(calc(0 * var(--i)));
+  transition: transform 0.5s, height 0.5s, width 0.5s;
+  transition-delay: 0.5s, 1.5s, 1.5s;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 5px var(--clr));
+  rotate: 135deg;
+}
+
+.menu.active li:hover a::before {
+  background: var(--clr);
+}
+
+.menu.active li:hover a ion-icon {
+  color: #161616;
+}
+
+.menuToggle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 32px;
+  transition: 1.5s;
+}
+
+.menu.active .menuToggle {
+  transform: rotate(315deg);
+}
+
+ion-icon {
+  display: inline-block;
+}
+
+/* Ensure buttons have neon light effect */
+.dashboard-button {
+  background-color: #282c34;
+  border: 2px solid #61dafb;
+  border-radius: 8px;
+  color: #61dafb;
+  font-size: 16px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
+}
+
+.dashboard-button:hover {
+  color: #fff;
+  border-color: #fff;
+  box-shadow: 0 0 20px rgba(97, 218, 251, 1);
+}
+
+.dashboard-button.profile {
+  background: linear-gradient(45deg, #61dafb, #282c34);
+  text-transform: uppercase;
+}
+
+.dashboard-button.settings {
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.7) 100%);
+}
+
+.dashboard-button.logout {
+  background: linear-gradient(135deg, #ff6b6b, #f06595);
+}
+
+.dashboard-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(97, 218, 251, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.dashboard-button:hover::after {
+  opacity: 1;
+}
+
+.menu {
+  z-index: 1;
+}
+
+.menuToggle {
+  z-index: 2;
+}

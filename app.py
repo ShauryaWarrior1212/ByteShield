@@ -113,12 +113,9 @@ def dashboard():
 def tools_page():
     return render_template('tools.html')
 
-@app.route('/profile')
-def profile():
-    if 'username' in session:
-        return render_template('profile.html', username=session['username'], email=session['email'])
-    else:
-        return redirect(url_for('index'))
+@app.route('/profile_settings')
+def profile_settings():
+    return render_template('profile_settings.html')
 
 @app.route('/settings')
 def settings():
@@ -287,6 +284,21 @@ def network_scan():
         result = f"Error: {str(e)}"
 
     return render_template('network_vulnerability_analyzer_results.html', result=result)
+
+@app.route('/suggestions_reports', methods=['GET', 'POST'])
+def suggestions_reports():
+    if request.method == 'POST':
+        suggestion = request.form.get('suggestion')
+        report = request.form.get('report')
+        
+        # Process suggestion/report (e.g., save to database, send email)
+        # For now, we'll just print it to the console
+        print(f"Suggestion: {suggestion}")
+        print(f"Report: {report}")
+
+        return jsonify({'message': 'Thank you for your feedback!'})
+    
+    return render_template('suggestions_reports.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    // Assuming menu toggle functionality
+    $(".menuToggle").click(function() {
+        $(".menu").toggleClass("active");
+    });
+
+    // Check for any other JS conflicts
     var toggleSound = $("#toggleSound")[0];
     var openSound = $("#openSound")[0];
     var hoverSound = $("#hoverSound")[0];
