@@ -15,10 +15,10 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+  width: 100vw; /* Ensure full viewport width */
+  height: 100vh; /* Ensure full viewport height */
   overflow: hidden;
+  z-index: -1;
 }
 
 #bgVideo {
@@ -29,24 +29,14 @@ body {
 
 header {
   position: fixed;
-  top: 0;
-  left: 0;
-  padding: 20px;
-  width: 100%;
-  background: transparent;
+  top: 20px; /* Adjust position if needed */
+  left: 20px;
   z-index: 1000;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
 }
 
 .logo {
-  position: relative;
-  top: -85px;
-  left: -70px;
   max-width: 250px;
   height: auto;
-  background: transparent;
 }
 
 .menu {
@@ -57,7 +47,6 @@ header {
   align-items: center;
   justify-content: center;
 }
-
 .menu li {
   position: absolute;
   left: 0;
@@ -66,13 +55,10 @@ header {
   transform-origin: 130px;
   transition: 0.5s;
   transition-delay: calc(0.1s * var(--i));
-  display: inline-block;
 }
-
 .menu.active li {
   transform: rotate(calc(360deg / 8 * var(--i)));
 }
-
 .menu a {
   display: flex;
   align-items: center;
@@ -88,11 +74,9 @@ header {
   transition-delay: 0.5s;
   filter: drop-shadow(0 0 2px var(--clr));
 }
-
 .menu.active a {
   color: var(--clr);
 }
-
 .menu a::before {
   content: "";
   position: absolute;
@@ -104,7 +88,6 @@ header {
   transition: width 0.5s, height 0.5s, transform 0.5s;
   transition-delay: 0.5s, 1s, 1.5s;
 }
-
 .menu.active a::before {
   width: 50px;
   height: 50px;
@@ -117,11 +100,9 @@ header {
   filter: drop-shadow(0 0 5px var(--clr));
   rotate: 135deg;
 }
-
 .menu.active li:hover a::before {
   background: var(--clr);
 }
-
 .menu.active li:hover a ion-icon {
   color: #161616;
 }
@@ -140,71 +121,6 @@ header {
   font-size: 32px;
   transition: 1.5s;
 }
-
 .menu.active .menuToggle {
   transform: rotate(315deg);
-}
-
-ion-icon {
-  display: inline-block;
-}
-
-/* Ensure buttons have neon light effect */
-.dashboard-button {
-  background-color: #282c34;
-  border: 2px solid #61dafb;
-  border-radius: 8px;
-  color: #61dafb;
-  font-size: 16px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.3s ease;
-  position: relative;
-  box-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
-}
-
-.dashboard-button:hover {
-  color: #fff;
-  border-color: #fff;
-  box-shadow: 0 0 20px rgba(97, 218, 251, 1);
-}
-
-.dashboard-button.profile {
-  background: linear-gradient(45deg, #61dafb, #282c34);
-  text-transform: uppercase;
-}
-
-.dashboard-button.settings {
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.7) 100%);
-}
-
-.dashboard-button.logout {
-  background: linear-gradient(135deg, #ff6b6b, #f06595);
-}
-
-.dashboard-button::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(97, 218, 251, 0.2);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.dashboard-button:hover::after {
-  opacity: 1;
-}
-
-.menu {
-  z-index: 1;
-}
-
-.menuToggle {
-  z-index: 2;
 }

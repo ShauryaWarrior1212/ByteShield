@@ -12,6 +12,10 @@ $(document).ready(function() {
     let menuToggle = document.querySelector(".menuToggle");
     let menu = document.querySelector(".menu");
 
+    document.querySelector('.btn').addEventListener('click', function() {
+        console.log('Button clicked!');
+      });
+
     menuToggle.onclick = function () {
         menu.classList.toggle("active");
         toggleSound.currentTime = 0; // Reset the audio to start from the beginning
