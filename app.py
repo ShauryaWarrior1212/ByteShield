@@ -108,6 +108,10 @@ def dashboard():
         return render_template('dashboard.html', username=session['username'], email=session['email'])
     else:
         return redirect(url_for('index'))
+    
+@app.route('/home')
+def home_page():
+    return render_template('home.html')
 
 @app.route('/tools')
 def tools_page():
@@ -258,19 +262,19 @@ def network_vulnerability_analyzer():
 
 @app.route('/network_scan', methods=['POST'])
 def network_scan():
-    target = request.form.get('target')  # Use .get() to avoid KeyError
+    target = request.form.get('target')
     nm = nmap.PortScanner()
+    result = ""
 
     try:
-        # Run the scan
+        logging.info(f"Scanning target: {target}")
         scan_result = nm.scan(hosts=target, arguments='-sS')
         host = list(scan_result['scan'].keys())[0]
-
+        
         if 'scan' in scan_result and host in scan_result['scan']:
-            result = f"Host: {host}\n"
+            result += f"Host: {host}\n"
             result += f"State: {scan_result['scan'][host]['status']['state']}\n\n"
 
-            # Display only open ports with their services
             for proto in nm[host].all_protocols():
                 ports = nm[host][proto].keys()
                 for port in ports:
@@ -279,8 +283,9 @@ def network_scan():
                         result += f"Port: {port}\tState: {port_info['state']}\tService: {port_info['name']}\n"
         else:
             result = "No open ports found or host seems down."
-
+            
     except Exception as e:
+        logging.error(f"Error occurred: {str(e)}")
         result = f"Error: {str(e)}"
 
     return render_template('network_vulnerability_analyzer_results.html', result=result)
