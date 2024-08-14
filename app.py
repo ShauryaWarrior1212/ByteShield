@@ -26,6 +26,10 @@ def get_db_connection():
     return conn
 
 @app.route('/')
+def info():
+    return render_template('info.html')
+
+@app.route('/')
 def index():
     if 'username' in session:
         return redirect(url_for('dashboard'))
@@ -109,10 +113,6 @@ def dashboard():
         return render_template('dashboard.html', username=session['username'], email=session['email'])
     else:
         return redirect(url_for('index'))
-    
-@app.route('/home')
-def home_page():
-    return render_template('home.html')
 
 @app.route('/tools')
 def tools_page():
@@ -128,11 +128,6 @@ def settings():
         return render_template('settings.html', username=session['username'], email=session['email'])
     else:
         return redirect(url_for('index'))
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('index'))
 
 @app.route('/detect_ip')
 def detect_ip():

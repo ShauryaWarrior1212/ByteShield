@@ -8,10 +8,12 @@
     <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body class="light"> <!-- Default theme -->
+<body class="light">
     <div class="settings-container">
         <header>
-            <a href="{{ url_for('dashboard') }}" class="back-button"><ion-icon name="arrow-back-outline"></ion-icon></a>
+            <a href="{{ url_for('dashboard') }}" class="back-button">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </a>
             <h1 id="settingsTitle">Settings</h1>
         </header>
         <main>
@@ -22,7 +24,13 @@
                     <select id="themeSelector">
                         <option value="light">Light Mode</option>
                         <option value="dark">Dark Mode</option>
+                        <option value="solarized">Solarized Light</option>
+                        <option value="night">Night Mode</option>
                     </select>
+                </div>
+                <div class="settings-item">
+                    <h3 id="livePreviewTitle">Live Theme Preview</h3>
+                    <div id="themePreview" class="preview-container"></div>
                 </div>
             </section>
 
@@ -30,70 +38,46 @@
                 <h2 id="generalSettingsTitle">General Settings</h2>
                 <div class="settings-item">
                     <h3 id="notificationsTitle">Notifications</h3>
-                    <label>
-                        <input type="checkbox" id="emailNotifications">
+                    <div class="toggle-switch">
+                        <label class="switch">
+                            <input type="checkbox" id="emailNotifications">
+                            <span class="slider round"></span>
+                        </label>
                         <span id="emailNotificationsText">Enable Email Notifications</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" id="pushNotifications">
+                    </div>
+                    <div class="toggle-switch">
+                        <label class="switch">
+                            <input type="checkbox" id="pushNotifications">
+                            <span class="slider round"></span>
+                        </label>
                         <span id="pushNotificationsText">Enable Push Notifications</span>
-                    </label>
+                    </div>
                 </div>
             </section>
 
             <section class="settings-section">
                 <h2 id="privacyTitle">Privacy</h2>
                 <div class="settings-item">
-                    <label>
-                        <input type="checkbox" id="dataCollection">
+                    <div class="toggle-switch">
+                        <label class="switch">
+                            <input type="checkbox" id="dataCollection">
+                            <span class="slider round"></span>
+                        </label>
                         <span id="dataCollectionText">Allow Data Collection</span>
-                    </label>
-                    <label>
-                        <input type="checkbox" id="thirdPartySharing">
+                    </div>
+                    <div class="toggle-switch">
+                        <label class="switch">
+                            <input type="checkbox" id="thirdPartySharing">
+                            <span class="slider round"></span>
+                        </label>
                         <span id="thirdPartySharingText">Allow Third-Party Sharing</span>
-                    </label>
+                    </div>
                 </div>
             </section>
 
-            <section class="settings-section">
-                <h2 id="accountTitle">Account</h2>
-                <div class="settings-item">
-                    <p id="connectedAccounts">Connected Accounts:</p>
-                    <button id="connectNewAccount">Connect New Account</button>
-                    <button id="removeAccount">Remove Account</button>
-                </div>
-            </section>
-
-            <section class="settings-section">
-                <div class="settings-item">
-                    <button id="logoutButton">Logout</button>
-                </div>
-            </section>
         </main>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeSelector = document.getElementById('themeSelector');
-            const logoutButton = document.getElementById('logoutButton');
-
-            // Apply theme change
-            themeSelector.addEventListener('change', function() {
-                document.body.className = this.value;
-                localStorage.setItem('theme', this.value); // Save theme preference
-            });
-
-            // Load saved theme
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.className = savedTheme;
-            themeSelector.value = savedTheme;
-
-            // Logout button logic
-            logoutButton.addEventListener('click', function() {
-                // Redirect to logout route or perform logout action
-                window.location.href = "{{ url_for('logout') }}";
-            });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
 </body>
 </html>

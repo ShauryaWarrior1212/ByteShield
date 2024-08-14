@@ -1,21 +1,37 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('settings-form');
+    const themeSelector = document.getElementById('themeSelector');
+    const themePreview = document.getElementById('themePreview');
+    const profilePictureInput = document.getElementById('profilePicture');
+    const profilePicturePreview = document.getElementById('profilePicturePreview');
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
+    // Apply theme change and preview
+    themeSelector.addEventListener('change', function() {
+        const selectedTheme = this.value;
+        document.body.className = selectedTheme;
+        localStorage.setItem('theme', selectedTheme); // Save theme preference
+        updateThemePreview(selectedTheme);
+    });
 
-        if (password && password !== confirmPassword) {
-            alert('Passwords do not match!');
-            return;
+    // Load saved theme and update preview
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.body.className = savedTheme;
+    themeSelector.value = savedTheme;
+    updateThemePreview(savedTheme);
+
+    function updateThemePreview(theme) {
+        themePreview.style.backgroundColor = getComputedStyle(document.body).backgroundColor;
+        themePreview.style.color = getComputedStyle(document.body).color;
+    }
+
+    // Handle profile picture upload
+    profilePictureInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                profilePicturePreview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
-
-        // Simulate form submission
-        alert('Settings saved successfully!');
-        form.reset();
     });
 });

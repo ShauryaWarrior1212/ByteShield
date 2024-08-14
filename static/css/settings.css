@@ -1,8 +1,76 @@
 /* settings.css */
 
+/* Common Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.settings-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    color: #007bff;
+    font-size: 24px;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    font-weight: 600;
+}
+
+button {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+    opacity: 0.9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.settings-section {
+    margin-bottom: 30px;
+}
+
+.settings-item {
+    margin: 15px 0;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
 /* Light Theme */
 body.light {
-    background-color: #f5f5f5;
+    background-color: #f0f2f5;
     color: #333;
 }
 
@@ -11,71 +79,142 @@ body.light .settings-container {
     border-color: #ddd;
 }
 
-body.light h1, body.light h2, body.light h3 {
-    color: #333;
-}
-
-body.light button {
+body.light .settings-container button {
     background-color: #007bff;
     color: #fff;
 }
 
-body.light button:hover {
+body.light .settings-container button:hover {
     background-color: #0056b3;
 }
 
 /* Dark Theme */
 body.dark {
-    background-color: #333;
-    color: #f5f5f5;
+    background-color: #121212;
+    color: #e0e0e0;
 }
 
 body.dark .settings-container {
-    background-color: #444;
-    border-color: #555;
+    background-color: #1e1e1e;
+    border-color: #333;
 }
 
-body.dark h1, body.dark h2, body.dark h3 {
-    color: #f5f5f5;
-}
-
-body.dark button {
+body.dark .settings-container button {
     background-color: #007bff;
     color: #fff;
 }
 
-body.dark button:hover {
+body.dark .settings-container button:hover {
     background-color: #0056b3;
 }
 
-.settings-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Solarized Theme */
+body.solarized {
+    background-color: #fdf6e3;
+    color: #657b83;
 }
 
-.settings-section {
-    margin-bottom: 20px;
+body.solarized .settings-container {
+    background-color: #eee8d5;
+    border-color: #93a1a1;
 }
 
-.settings-item {
+body.solarized .settings-container button {
+    background-color: #2aa198;
+    color: #fff;
+}
+
+body.solarized .settings-container button:hover {
+    background-color: #1d7874;
+}
+
+/* Night Theme */
+body.night {
+    background-color: #002b36;
+    color: #839496;
+}
+
+body.night .settings-container {
+    background-color: #073642;
+    border-color: #002b36;
+}
+
+body.night .settings-container button {
+    background-color: #268bd2;
+    color: #fff;
+}
+
+body.night .settings-container button:hover {
+    background-color: #005b99;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    display: flex;
+    align-items: center;
     margin: 10px 0;
 }
 
-h1, h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-button {
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type="checkbox"] {
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 20px;
     margin-right: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 12px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #007bff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(14px);
+}
+
+/* Profile Picture */
+.profile-picture-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+}
+
+.preview-container {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+    background-color: #f5f5f5;
 }
