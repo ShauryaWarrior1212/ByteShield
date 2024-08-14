@@ -305,5 +305,9 @@ def suggestions_reports():
     
     return render_template('suggestions_reports.html')
 
+@app.route('/password_strengthner')
+def password():
+    return render_template('password.html')
+
 if __name__ == '__main__':
     app.run(debug=True)

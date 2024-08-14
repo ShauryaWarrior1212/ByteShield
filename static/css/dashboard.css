@@ -35,8 +35,12 @@ header {
 }
 
 .logo {
-  max-width: 250px;
-  height: auto;
+  position: relative; /* Adjust positioning if needed */
+  top: -85px; /* Distance from the top of the header */
+  left: -70px; /* Distance from the left of the header */
+  max-width: 250px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  background: transparent; /* Ensure no background */
 }
 
 .menu {
