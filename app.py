@@ -25,9 +25,13 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-@app.route('/')
+@app.route('/info')
 def info():
     return render_template('info.html')
+
+@app.route('/game')
+def game():
+    return render_template('game.html')
 
 @app.route('/')
 def index():

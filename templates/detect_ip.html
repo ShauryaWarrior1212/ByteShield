@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='ip-detector/detect_ip_styles.css') }}">
 </head>
 <body>
+    <a href="javascript:history.back()" class="back-button">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+    </a>
     <div class="video-background">
         <video id="bgVideo" muted loop autoplay>
             <source src="/static/bg.mp4" type="video/mp4">

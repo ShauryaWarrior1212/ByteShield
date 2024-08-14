@@ -8,27 +8,32 @@
     <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body class="light"> <!-- Default theme -->
+<body class="light">
     <div class="profile-settings-container">
         <header>
             <a href="{{ url_for('dashboard') }}" class="back-button"><ion-icon name="arrow-back-outline"></ion-icon></a>
             <h1>Profile Settings</h1>
+            <button id="themeToggle" aria-label="Toggle Dark Mode"><ion-icon name="moon-outline"></ion-icon></button>
         </header>
         <main>
             <section class="profile-info">
                 <h2>Profile Information</h2>
-                <form id="profileForm">
+                <form id="profileForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="profilePicture">Profile Picture:</label>
-                        <input type="file" id="profilePicture" name="profilePicture">
+                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+                        <div class="image-preview">
+                            <img id="previewPicture" src="#" alt="Profile Picture Preview" />
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="displayName">Display Name:</label>
-                        <input type="text" id="displayName" name="displayName" value="Current Name">
+                        <input type="text" id="displayName" name="displayName" placeholder="Enter display name">
+                        <span id="nameError" class="error-message"></span>
                     </div>
                     <div class="form-group">
                         <label for="bio">Bio:</label>
-                        <textarea id="bio" name="bio" rows="4">Current Bio</textarea>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Enter bio"></textarea>
                     </div>
                     <button type="submit" id="saveProfile">Save Changes</button>
                 </form>
@@ -40,14 +45,17 @@
                     <div class="form-group">
                         <label for="currentPassword">Current Password:</label>
                         <input type="password" id="currentPassword" name="currentPassword">
+                        <span id="currentPasswordError" class="error-message"></span>
                     </div>
                     <div class="form-group">
                         <label for="newPassword">New Password:</label>
                         <input type="password" id="newPassword" name="newPassword">
+                        <span id="newPasswordError" class="error-message"></span>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Confirm New Password:</label>
                         <input type="password" id="confirmPassword" name="confirmPassword">
+                        <span id="confirmPasswordError" class="error-message"></span>
                     </div>
                     <button type="submit" id="changePassword">Change Password</button>
                 </form>
@@ -57,20 +65,99 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Handle theme toggle
+            document.getElementById('themeToggle').addEventListener('click', function() {
+                document.body.classList.toggle('dark');
+                const icon = this.querySelector('ion-icon');
+                icon.setAttribute('name', document.body.classList.contains('dark') ? 'sunny-outline' : 'moon-outline');
+            });
+
+            // Handle profile picture preview
+            document.getElementById('profilePicture').addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const preview = document.getElementById('previewPicture');
+                        preview.src = e.target.result;
+                        preview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
             // Handle form submissions
             const profileForm = document.getElementById('profileForm');
             const passwordForm = document.getElementById('passwordForm');
 
             profileForm.addEventListener('submit', function(event) {
                 event.preventDefault();
-                // Handle profile picture upload and profile updates here
-                alert('Profile changes saved!');
+                // Validate inputs
+                const name = document.getElementById('displayName').value.trim();
+                if (name === '') {
+                    document.getElementById('nameError').textContent = 'Display name is required.';
+                    return;
+                }
+                document.getElementById('nameError').textContent = '';
+
+                // Handle profile picture upload and profile updates
+                // Example AJAX request
+                // $.ajax({
+                //     url: '/update-profile',
+                //     type: 'POST',
+                //     data: new FormData(profileForm),
+                //     processData: false,
+                //     contentType: false,
+                //     success: function(response) {
+                //         alert('Profile changes saved!');
+                //     }
+                // });
             });
 
             passwordForm.addEventListener('submit', function(event) {
                 event.preventDefault();
-                // Handle password change logic here
-                alert('Password changed successfully!');
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                // Validate passwords
+                let valid = true;
+                if (currentPassword === '') {
+                    document.getElementById('currentPasswordError').textContent = 'Current password is required.';
+                    valid = false;
+                } else {
+                    document.getElementById('currentPasswordError').textContent = '';
+                }
+
+                if (newPassword === '') {
+                    document.getElementById('newPasswordError').textContent = 'New password is required.';
+                    valid = false;
+                } else {
+                    document.getElementById('newPasswordError').textContent = '';
+                }
+
+                if (newPassword !== confirmPassword) {
+                    document.getElementById('confirmPasswordError').textContent = 'Passwords do not match.';
+                    valid = false;
+                } else {
+                    document.getElementById('confirmPasswordError').textContent = '';
+                }
+
+                if (!valid) return;
+
+                // Handle password change logic
+                // Example AJAX request
+                // $.ajax({
+                //     url: '/change-password',
+                //     type: 'POST',
+                //     data: {
+                //         currentPassword: currentPassword,
+                //         newPassword: newPassword
+                //     },
+                //     success: function(response) {
+                //         alert('Password changed successfully!');
+                //     }
+                // });
             });
         });
     </script>

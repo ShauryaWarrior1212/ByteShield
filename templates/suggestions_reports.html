@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/suggestions_reports.css') }}">
 </head>
 <body>
+    <a href="javascript:history.back()" class="back-button">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+    </a>   
     <div class="form-container">
         <h1>Suggestions / Reports</h1>
         <form action="/suggestions_reports" method="POST">

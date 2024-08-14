@@ -81,3 +81,30 @@ h1 {
     border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
+
+/* Back Button Styles */
+.back-button {
+    position: fixed; /* Fixed positioning to keep it in place */
+    top: 10px; /* Adjust the distance from the top */
+    left: 10px; /* Adjust the distance from the left */
+    display: flex;
+    align-items: center;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 24px;
+    transition: color 0.3s;
+    z-index: 1000; /* Ensures the button is on top of other elements */
+}
+
+.back-button ion-icon {
+    font-size: 24px;
+}
+
+.back-button:hover {
+    color: #0056b3;
+}
+
+/* Adjust the body to avoid overlap with the button */
+body {
+    padding-top: 50px; /* Adjust based on the height of the back button */
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Protection Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-button">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+    </a>
+    <div class="game-container">
+        <h1>Cyber Protection Game</h1>
+        <p>Protect your system from cyber threats!</p>
+        <div id="gameArea">
+            <div id="player"></div>
+        </div>
+        <div id="score">Score: 0</div>
+        <button id="startBtn">Start Game</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
