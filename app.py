@@ -316,5 +316,39 @@ def suggestions_reports():
 def password():
     return render_template('password.html')
 
+# Extended FAQ data
+faqs = [
+    {"question": "What is cybersecurity?", "answer": "Cybersecurity refers to the practice of protecting systems, networks, and programs from digital attacks."},
+    {"question": "What are the common types of cyber threats?", "answer": "Common types include malware, phishing, ransomware, denial of service (DoS), and man-in-the-middle (MITM) attacks."},
+    {"question": "What is phishing?", "answer": "Phishing is a type of cyber attack where attackers impersonate legitimate organizations via email or other communication methods to steal sensitive data."},
+    {"question": "How can I protect myself from phishing attacks?", "answer": "Be cautious of unsolicited emails, don’t click on suspicious links, and verify the authenticity of requests for sensitive information."},
+    {"question": "What is malware?", "answer": "Malware is malicious software designed to disrupt, damage, or gain unauthorized access to computer systems."},
+    {"question": "How does ransomware work?", "answer": "Ransomware encrypts the victim’s data and demands payment, typically in cryptocurrency, for the decryption key."},
+    {"question": "What is a firewall?", "answer": "A firewall is a security system that monitors and controls incoming and outgoing network traffic based on predetermined security rules."},
+    {"question": "Why is two-factor authentication important?", "answer": "Two-factor authentication adds an extra layer of security by requiring not only a password and username but also something that only the user has on them, like a physical token or a mobile device."},
+    {"question": "What is a VPN, and how does it work?", "answer": "A VPN (Virtual Private Network) encrypts your internet traffic and masks your online identity, making it more difficult for third parties to track your activities."},
+    {"question": "What is social engineering?", "answer": "Social engineering is the use of deception to manipulate individuals into divulging confidential or personal information that may be used for fraudulent purposes."},
+    {"question": "What is the dark web?", "answer": "The dark web is a part of the internet that is not indexed by search engines and is often used for illegal activities."},
+    {"question": "What are the signs of a compromised account?", "answer": "Signs include unexpected password changes, unfamiliar login locations, unauthorized transactions, and receiving alerts about unusual activity."},
+    {"question": "What is a DDoS attack?", "answer": "A Distributed Denial of Service (DDoS) attack overwhelms a system with traffic, causing it to become slow or completely inaccessible."},
+    {"question": "How do I secure my home Wi-Fi network?", "answer": "Use strong passwords, enable WPA3 encryption, change the default router settings, and regularly update firmware."},
+    {"question": "What are the best practices for password management?", "answer": "Use unique passwords for different accounts, enable two-factor authentication, and consider using a password manager."},
+    {"question": "What is encryption?", "answer": "Encryption is the process of converting information into a code to prevent unauthorized access."},
+    {"question": "How can I prevent identity theft online?", "answer": "Use strong passwords, avoid sharing personal information, monitor your accounts, and be cautious of phishing attempts."},
+    {"question": "What is SSL/TLS?", "answer": "SSL (Secure Sockets Layer) and TLS (Transport Layer Security) are cryptographic protocols designed to provide secure communication over a computer network."},
+    {"question": "What should I do if my account is hacked?", "answer": "Change your passwords immediately, enable two-factor authentication, and contact the service provider to report the incident."},
+    {"question": "How do I create a form in Flask?", "answer": "You can create forms in Flask using HTML and handle the form data using Flask's request object."},
+]
+
+@app.route("/faq", methods=["GET", "POST"])
+def faq():
+    query = request.form.get("query", "").lower()
+    if query:
+        filtered_faqs = [faq for faq in faqs if query in faq["question"].lower()]
+    else:
+        filtered_faqs = faqs
+
+    return render_template("faq.html", faqs=filtered_faqs, query=query)
+
 if __name__ == '__main__':
     app.run(debug=True)
