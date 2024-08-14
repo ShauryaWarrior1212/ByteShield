@@ -9,6 +9,7 @@ import time
 import os
 import nmap
 import base64
+from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # For flashing messages
@@ -256,6 +257,13 @@ def get_attack_data():
     }
     return jsonify(attack_data)
 
+# Set up logging
+handler = RotatingFileHandler('app.log', maxBytes=10000, backupCount=1)
+handler.setLevel(logging.ERROR)
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+app.logger.addHandler(handler)
+
 @app.route('/network_vulnerability_analyzer')
 def network_vulnerability_analyzer():
     return render_template('network_vulnerability_analyzer.html')
@@ -267,7 +275,7 @@ def network_scan():
     result = ""
 
     try:
-        logging.info(f"Scanning target: {target}")
+        app.logger.info(f"Scanning target: {target}")
         scan_result = nm.scan(hosts=target, arguments='-sS')
         host = list(scan_result['scan'].keys())[0]
         
@@ -285,7 +293,7 @@ def network_scan():
             result = "No open ports found or host seems down."
             
     except Exception as e:
-        logging.error(f"Error occurred: {str(e)}")
+        app.logger.error(f"Error occurred: {str(e)}")
         result = f"Error: {str(e)}"
 
     return render_template('network_vulnerability_analyzer_results.html', result=result)
