@@ -3,81 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
-    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Settings Page</title>
+    <link rel="stylesheet" href="static/css/settings.css">
 </head>
-<body class="light">
+<body>
     <div class="settings-container">
         <header>
-            <a href="{{ url_for('dashboard') }}" class="back-button">
-                <ion-icon name="arrow-back-outline"></ion-icon>
-            </a>
-            <h1 id="settingsTitle">Settings</h1>
+            <a href="/dashboard" class="back-button">&larr; Back</a>
+            <h1>Settings</h1>
         </header>
-        <main>
-            <section class="settings-section">
-                <h2 id="themeTitle">Theme</h2>
-                <div class="settings-item">
-                    <p id="chooseTheme">Choose your preferred theme for the dashboard:</p>
-                    <select id="themeSelector">
-                        <option value="light">Light Mode</option>
-                        <option value="dark">Dark Mode</option>
-                        <option value="solarized">Solarized Light</option>
-                        <option value="night">Night Mode</option>
-                    </select>
+        
+        <!-- Profile Settings -->
+        <div class="profile-settings">
+            <h2>Profile Settings</h2>
+            <div class="form-group">
+                <label for="profile-pic">Profile Picture</label>
+                <input type="file" id="profile-pic">
+                <div class="image-preview">
+                    <img id="profile-pic-preview" src="" alt="Profile Picture">
                 </div>
-                <div class="settings-item">
-                    <h3 id="livePreviewTitle">Live Theme Preview</h3>
-                    <div id="themePreview" class="preview-container"></div>
-                </div>
-            </section>
+                <button id="upload-pic">Upload Picture</button>
+            </div>
+            <div class="form-group">
+                <label for="display-name">Display Name</label>
+                <input type="text" id="display-name">
+                <button id="save-display-name">Save Display Name</button>
+            </div>
+        </div>
+        
+        <!-- Email, Username, Password Settings -->
+        <div class="account-settings">
+            <h2>Account Settings</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+                <button id="save-email">Save Email</button>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username">
+                <button id="save-username">Save Username</button>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password">
+                <button id="save-password">Change Password</button>
+            </div>
+        </div>
+        
+        <!-- Notification Preferences -->
+        <div class="notification-settings">
+            <h2>Notification Preferences</h2>
+            <div class="form-group toggle-switch">
+                <label for="email-notifications">Email Notifications</label>
+                <label class="switch">
+                    <input type="checkbox" id="email-notifications">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="form-group toggle-switch">
+                <label for="push-notifications">Push Notifications</label>
+                <label class="switch">
+                    <input type="checkbox" id="push-notifications">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
 
-            <section class="settings-section">
-                <h2 id="generalSettingsTitle">General Settings</h2>
-                <div class="settings-item">
-                    <h3 id="notificationsTitle">Notifications</h3>
-                    <div class="toggle-switch">
-                        <label class="switch">
-                            <input type="checkbox" id="emailNotifications">
-                            <span class="slider round"></span>
-                        </label>
-                        <span id="emailNotificationsText">Enable Email Notifications</span>
-                    </div>
-                    <div class="toggle-switch">
-                        <label class="switch">
-                            <input type="checkbox" id="pushNotifications">
-                            <span class="slider round"></span>
-                        </label>
-                        <span id="pushNotificationsText">Enable Push Notifications</span>
-                    </div>
-                </div>
-            </section>
+        <!-- Privacy Settings -->
+        <div class="privacy-settings">
+            <h2>Privacy Settings</h2>
+            <div class="form-group">
+                <label for="profile-visibility">Profile Visibility</label>
+                <select id="profile-visibility">
+                    <option value="public">Public</option>
+                    <option value="friends">Friends Only</option>
+                    <option value="private">Private</option>
+                </select>
+                <button id="save-privacy-settings">Save Privacy Settings</button>
+            </div>
+        </div>
 
-            <section class="settings-section">
-                <h2 id="privacyTitle">Privacy</h2>
-                <div class="settings-item">
-                    <div class="toggle-switch">
-                        <label class="switch">
-                            <input type="checkbox" id="dataCollection">
-                            <span class="slider round"></span>
-                        </label>
-                        <span id="dataCollectionText">Allow Data Collection</span>
-                    </div>
-                    <div class="toggle-switch">
-                        <label class="switch">
-                            <input type="checkbox" id="thirdPartySharing">
-                            <span class="slider round"></span>
-                        </label>
-                        <span id="thirdPartySharingText">Allow Third-Party Sharing</span>
-                    </div>
-                </div>
-            </section>
+        <!-- Theme Preferences -->
+<div class="settings-section">
+    <h2>Theme Preferences</h2>
+    <div class="form-group">
+        <label for="theme-select">Select Theme:</label>
+        <select id="theme-select">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="solarized">Solarized</option>
+            <option value="night">Night</option>
+        </select>
+        <button id="apply-theme">Apply Theme</button>
+    </div>
+</div>
 
-        </main>
+        <!-- Security Settings -->
+        <div class="security-settings">
+            <h2>Security Settings</h2>
+            <div class="form-group">
+                <label for="two-factor-auth">Two-Factor Authentication</label>
+                <label class="switch">
+                    <input type="checkbox" id="two-factor-auth">
+                    <span class="slider round"></span>
+                </label>
+                <button id="save-security-settings">Save Security Settings</button>
+            </div>
+        </div>
+
+        <!-- Account Deletion -->
+        <div class="account-deletion">
+            <h2>Account Deletion</h2>
+            <button id="delete-account">Delete Account</button>
+        </div>
     </div>
 
-    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+    <script src="static/js/settings.js"></script>
 </body>
 </html>

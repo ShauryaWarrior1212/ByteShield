@@ -31,7 +31,6 @@ body.dark .info-container {
     border-color: #666;
     position: relative;
     z-index: 1;
-    overflow: auto; /* Ensure that content scrolls if needed */
 }
 
 body.dark h1, body.dark h2, body.dark h3 {
@@ -64,6 +63,15 @@ body.dark a:hover {
     100% { background-position: 0% 0%; }
 }
 
+.logo {
+    position: absolute; /* Adjust positioning if needed */
+    top: -85px; /* Distance from the top of the header */
+    left: -70px; /* Distance from the left of the header */
+    max-width: 250px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    background: transparent; /* Ensure no background */
+}
+
 .info-container {
     max-width: 900px;
     margin: 20px auto; /* Center container with margin */
@@ -94,39 +102,116 @@ a:hover {
     text-decoration: underline;
 }
 
+/* info.css */
+
+/* Advanced Futuristic Dashboard Button */
 .dashboard-button {
     display: inline-flex;
     align-items: center;
-    padding: 10px 20px;
-    border-radius: 8px; /* More rounded corners */
-    background-color: #007bff;
-    color: #fff;
+    padding: 12px 24px; /* Adjusted padding for a more balanced look */
+    border-radius: 12px; /* Rounded corners for a modern look */
+    background: linear-gradient(145deg, #1c1c1c, #333); /* Dark gradient background */
+    color: #00bfff; /* Bright cyan text color */
     text-decoration: none;
-    font-size: 18px;
-    font-weight: normal; /* Default font weight for button text */
-    position: absolute;
-    right: 20px; /* Position from the right edge */
-    top: 20px; /* Position from the top edge */
-    line-height: 1.5; /* Ensure proper line height */
-    white-space: nowrap; /* Prevent text from wrapping */
-    font-family: 'Roboto', sans-serif; /* Modern font family */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
-    z-index: 2; /* Ensure button is above other content */
+    font-size: 20px; /* Slightly larger font size for prominence */
+    font-weight: bold; /* Bold text for emphasis */
+    position: relative; /* Required for pseudo-elements */
+    overflow: hidden; /* Ensure effects stay within bounds */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Enhanced shadow for depth */
+    border: 2px solid #00bfff; /* Bright cyan border for contrast */
+    transition: all 0.4s ease; /* Smooth transition for hover effects */
+    cursor: pointer; /* Pointer cursor for clickable button */
+    outline: none; /* Remove outline */
 }
 
+.dashboard-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e90ff, #00bfff); /* Gradient overlay */
+    transition: width 0.4s ease; /* Smooth transition for hover effect */
+    z-index: 1; /* Positioned behind the button text */
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8); /* Inner shadow effect */
+}
+
+.dashboard-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Darker overlay */
+    transition: background 0.4s ease; /* Smooth transition for hover effect */
+    z-index: 0; /* Positioned behind the button text and gradient overlay */
+    border-radius: 12px; /* Match the button's border radius */
+    filter: blur(8px); /* Blur effect for a futuristic look */
+}
+
+/* Hover and Active States */
+.dashboard-button:hover::before {
+    width: 100%; /* Show gradient effect on hover */
+}
+
+.dashboard-button:hover::after {
+    background: rgba(0, 0, 0, 0.6); /* Darker overlay on hover */
+}
+
+.dashboard-button:hover {
+    background: #333; /* Slightly lighter background on hover */
+    color: #e0e0e0; /* Change text color on hover */
+    transform: scale(1.1); /* Slightly scale up the button */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9); /* Enhanced shadow on hover */
+    border-color: #00bfff; /* Bright border color on hover */
+    animation: pulse 1.5s infinite; /* Pulsing animation */
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.8), 0 0 20px rgba(0, 191, 255, 0.6), 0 0 30px rgba(0, 191, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 191, 255, 0.8), 0 0 40px rgba(0, 191, 255, 0.6), 0 0 60px rgba(0, 191, 255, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(0, 191, 255, 0.8), 0 0 20px rgba(0, 191, 255, 0.6), 0 0 30px rgba(0, 191, 255, 0.4);
+    }
+}
+
+.dashboard-button:active {
+    transform: scale(1); /* Scale back to normal on click */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Return to normal shadow */
+}
+
+/* Icon and Text */
 .dashboard-button ion-icon {
-    margin-right: 8px; /* Space between icon and text */
-    font-size: 24px; /* Increase icon size */
+    margin-right: 12px; /* Space between icon and text */
+    font-size: 24px; /* Consistent icon size */
+    color: #00bfff; /* Bright cyan color for icon */
     vertical-align: middle; /* Align icon with text */
+    transition: color 0.4s ease; /* Smooth color transition */
 }
 
 .dashboard-button span {
     vertical-align: middle; /* Align text with icon */
+    color: #00bfff; /* Bright cyan text color */
+    transition: color 0.4s ease; /* Smooth color transition */
 }
 
-.dashboard-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px); /* Lift button on hover */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 15px #00bfff, 0 0 20px #00bfff;
+    }
+    50% {
+        text-shadow: 0 0 10px #00bfff, 0 0 20px #00bfff, 0 0 30px #00bfff, 0 0 40px #00bfff;
+    }
+    100% {
+        text-shadow: 0 0 5px #00bfff, 0 0 10px #00bfff, 0 0 15px #00bfff, 0 0 20px #00bfff;
+    }
 }
 
 .info-section {

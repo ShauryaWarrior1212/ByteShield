@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            margin: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 40px 0;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .search-container {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+        }
+        .question {
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 18px;
+            position: relative;
+            padding-right: 20px;
+        }
+        .question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-size: 24px;
+            color: #007bff;
+        }
+        .answer {
+            display: none;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .faq-item.active .answer {
+            display: block;
+        }
+        .faq-item.active .question::after {
+            content: '-';
+        }
+        .no-results {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="container">
+        <div class="search-container">
+            <form method="POST" action="/">
+                <input type="text" name="query" placeholder="Search FAQs..." value="{{ query }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="faq-list">
+            {% if faqs %}
+                {% for faq in faqs %}
+                    <div class="faq-item">
+                        <div class="question">{{ faq.question }}</div>
+                        <div class="answer">{{ faq.answer }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-results">No FAQs found matching your search.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

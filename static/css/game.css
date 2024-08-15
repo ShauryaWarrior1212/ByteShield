@@ -79,7 +79,43 @@ body {
     color: #0056b3;
 }
 
-/* Adjust the body to avoid overlap with the button */
-body {
-    padding-top: 50px; /* Adjust based on the height of the back button */
+/* Control Buttons */
+.controls {
+    display: none; /* Initially hidden */
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.control-btn {
+    background-color: #00ffff;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    color: #000;
+    cursor: pointer;
+    font-size: 18px;
+    position: relative;
+    width: 80px; /* Adjusted for a larger button */
+    height: 80px; /* Adjusted for a larger button */
+}
+
+.control-btn .icon {
+    display: block;
+    font-size: 30px;
+}
+
+.control-btn .label {
+    display: block;
+    font-size: 14px;
+}
+
+/* Button appearance for active state */
+.control-btn:active {
+    background-color: #007bff;
+    color: #fff;
 }

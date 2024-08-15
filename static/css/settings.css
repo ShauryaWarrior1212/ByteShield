@@ -1,166 +1,189 @@
-/* settings.css */
-
-/* Common Styles */
+/* Base styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    transition: background-color 0.3s, color 0.3s;
+    color: #333;
 }
 
+/* Light theme */
+body[data-theme="light"] {
+    background: #f4f4f4;
+    color: #333;
+}
+
+/* Dark theme */
+body[data-theme="dark"] {
+    background: #333;
+    color: #f4f4f4;
+}
+
+/* Solarized theme */
+body[data-theme="solarized"] {
+    background: #fdf6e3;
+    color: #333;
+}
+
+/* Night theme */
+body[data-theme="night"] {
+    background: #2e2e2e;
+    color: #ccc;
+}
+
+
 .settings-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s, border-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
 }
 
 header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-}
-
-.back-button {
-    color: #007bff;
-    font-size: 24px;
-    text-decoration: none;
-    margin-right: 20px;
-}
-
-h1, h2, h3 {
-    margin: 0;
-    font-weight: 600;
-}
-
-button {
-    border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-button:hover {
-    opacity: 0.9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.settings-section {
+    justify-content: space-between;
     margin-bottom: 30px;
 }
 
-.settings-item {
-    margin: 15px 0;
+.back-button {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 28px;
+    transition: color 0.3s ease;
+}
+
+.back-button:hover {
+    color: #0056b3;
 }
 
 h1 {
     font-size: 28px;
+    margin: 0;
+    color: #007bff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Styles */
+.profile-settings,
+.account-settings,
+.notification-settings,
+.privacy-settings,
+.theme-settings,
+.security-settings,
+.account-deletion {
+    margin-bottom: 30px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 22px;
+    color: #007bff;
+    font-weight: 600;
 }
 
-h3 {
-    font-size: 18px;
+.form-group {
+    margin-bottom: 20px;
 }
 
-/* Light Theme */
-body.light {
-    background-color: #f0f2f5;
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
     color: #333;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
 }
 
-body.light .settings-container {
-    background-color: #fff;
-    border-color: #ddd;
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
 }
 
-body.light .settings-container button {
+textarea {
+    resize: vertical;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+button {
     background-color: #007bff;
     color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-body.light .settings-container button:hover {
+button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
-/* Dark Theme */
-body.dark {
-    background-color: #121212;
-    color: #e0e0e0;
+button:active {
+    transform: translateY(0);
 }
 
-body.dark .settings-container {
-    background-color: #1e1e1e;
-    border-color: #333;
+.image-preview {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
 }
 
-body.dark .settings-container button {
-    background-color: #007bff;
-    color: #fff;
-}
-
-body.dark .settings-container button:hover {
-    background-color: #0056b3;
-}
-
-/* Solarized Theme */
-body.solarized {
-    background-color: #fdf6e3;
-    color: #657b83;
-}
-
-body.solarized .settings-container {
-    background-color: #eee8d5;
-    border-color: #93a1a1;
-}
-
-body.solarized .settings-container button {
-    background-color: #2aa198;
-    color: #fff;
-}
-
-body.solarized .settings-container button:hover {
-    background-color: #1d7874;
-}
-
-/* Night Theme */
-body.night {
-    background-color: #002b36;
-    color: #839496;
-}
-
-body.night .settings-container {
-    background-color: #073642;
-    border-color: #002b36;
-}
-
-body.night .settings-container button {
-    background-color: #268bd2;
-    color: #fff;
-}
-
-body.night .settings-container button:hover {
-    background-color: #005b99;
+.image-preview img {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Toggle Switch */
 .toggle-switch {
     display: flex;
     align-items: center;
-    margin: 10px 0;
+    margin-bottom: 15px;
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 34px;
-    height: 20px;
-    margin-right: 10px;
+    width: 40px;
+    height: 22px;
+    margin-right: 12px;
 }
 
 .switch input {
@@ -178,14 +201,14 @@ body.night .settings-container button:hover {
     bottom: 0;
     background-color: #ccc;
     transition: .4s;
-    border-radius: 12px;
+    border-radius: 22px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 12px;
-    width: 12px;
+    height: 14px;
+    width: 14px;
     border-radius: 50%;
     left: 4px;
     bottom: 4px;
@@ -198,23 +221,15 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(14px);
+    transform: translateX(18px);
 }
 
-/* Profile Picture */
-.profile-picture-preview {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-top: 10px;
+/* Delete Account Button */
+.account-deletion button {
+    background-color: #e74c3c;
 }
 
-.preview-container {
-    width: 100%;
-    height: 100px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-top: 10px;
-    background-color: #f5f5f5;
+.account-deletion button:hover {
+    background-color: #c0392b;
 }
+
