@@ -272,6 +272,8 @@ def network_scan():
     try:
         app.logger.info(f"Scanning target: {target}")
         scan_result = nm.scan(hosts=target, arguments='-sS')
+        app.logger.info(f"Scan result: {scan_result}")
+
         host = list(scan_result['scan'].keys())[0]
         
         if 'scan' in scan_result and host in scan_result['scan']:
