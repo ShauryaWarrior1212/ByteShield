@@ -1,202 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suggestions & Reports</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+  <meta charset="UTF-8">
+  <title>Help & Support</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto Mono', monospace;
-            background-color: #2e2e2e;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #2e2e2e;
+      color: #ffffff;
+      font-family: 'Roboto Mono', monospace;
+      overflow-x: hidden;
+    }
 
-        .header {
-            text-align: center;
-            padding: 50px 0;
-            font-size: 3em;
-            color: #00ffff;
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-            animation: glow 3s infinite;
-        }
+    .header {
+      text-align: center;
+      padding: 50px 0;
+      font-size: 3em;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      animation: glow 3s infinite;
+    }
 
-        .content {
-            padding: 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      }
+      50% {
+        text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
+      }
+      100% {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      }
+    }
 
-        .section {
-            margin-top: 40px;
-        }
+    .content {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
 
-        .form-container {
-            background-color: #1b1b1b;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 20px 0;
-            color: #ffffff;
-            box-shadow: 0 0 15px rgb(0, 255, 234);
-            animation: pulse 3s infinite;
-        }
+    .section {
+      margin-top: 40px;
+    }
 
-        .form-container h3 {
-            color: #00ffff;
-            margin-top: 0;
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-        }
+    .contact-form, .contact-info {
+      background-color: #1b1b1b;
+      padding: 30px;
+      border-radius: 15px;
+      margin: 20px 0;
+      color: #ffffff;
+      box-shadow: 0 0 15px rgb(0, 255, 234);
+      animation: pulse 3s infinite;
+    }
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+    .contact-form h3, .contact-info h3 {
+      color: #00ffff;
+      margin-top: 0;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+    }
 
-        label {
-            margin: 10px 0 5px;
-        }
+    .contact-form label {
+      display: block;
+      margin-bottom: 5px;
+    }
 
-        input, select, textarea {
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: #ffffff;
-        }
+    .contact-form input, .contact-form textarea {
+      width: calc(100% - 40px);
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #ffffff;
+    }
 
-        button {
-            background-color: #00ffff;
-            color: #000000;
-            border: none;
-            padding: 15px 20px;
-            font-size: 1.2em;
-            border-radius: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: background-color 0.3s;
-        }
+    .contact-form button {
+      background-color: #00ffff;
+      color: #000000;
+      border: none;
+      padding: 15px 20px;
+      font-size: 1.2em;
+      border-radius: 5px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
 
-        button:hover {
-            background-color: #00cccc;
-        }
+    .contact-form button:hover {
+      background-color: #00cccc;
+    }
 
-        .footer {
-            text-align: center;
-            padding: 20px 0;
-            color: #555;
-            background-color: #1b1b1b;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
+    .contact-info p {
+      margin: 10px 0;
+    }
 
-        .footer a {
-            color: #00ffff;
-            text-decoration: none;
-        }
+    .contact-info a {
+      color: #00ffff;
+      text-decoration: none;
+    }
 
-        .footer a:hover {
-            text-decoration: underline;
-        }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.02);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
 
-        @keyframes glow {
-            0% {
-                text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-            }
-            50% {
-                text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
-            }
-            100% {
-                text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-            }
-        }
-    </style>
+    .footer {
+      text-align: center;
+      padding: 20px 0;
+      color: #555;
+    }
+  </style>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
 
-    <div class="header">Suggestions & Reports</div>
+  <div class="header">Help & Support</div>
 
-    <div class="content">
-        <div class="section">
-            <div class="form-container">
-                <h3>Submit Your Feedback</h3>
-                <form id="feedbackForm">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    
-                    <label for="type">Feedback Type:</label>
-                    <select id="type" name="type" required>
-                        <option value="" disabled selected>Select type</option>
-                        <option value="suggestion">Suggestion</option>
-                        <option value="report">Report</option>
-                    </select>
-                    
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" rows="6" required></textarea>
-                    
-                    <button type="submit">Send Feedback</button>
-                </form>
-            </div>
-        </div>
+  <div class="content">
+    <div class="section">
+      <div class="contact-form">
+        <h3>Contact Us</h3>
+        <form id="contact-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+          
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+          
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
     </div>
 
-    <div class="footer">
-        &copy; ByteShield | <a href="#">Learn More</a>
+    <div class="section">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <p>For any queries or support, you can reach us through the following channels:</p>
+        <p><strong>Team Email:</strong> <a href="mailto:ByteShield2024@gmail.com">ByteShield2024@gmail.com</a></p>
+        <p><strong>Technical Support:</strong> <a href="mailto:shauryaveer@globalschoolsalumni.org">shauryaveer@globalschoolsalumni.org</a></p>
+      </div>
     </div>
+  </div>
 
-    <!-- Load EmailJS SDK -->
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        emailjs.init("IMvRAEfpKrlBYQh4y"); // Replace with your public API key
+  <div class="footer">
+    &copy; ByteShield | <a href="#">Learn More</a>
+  </div>
 
-        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+  <script>
+    emailjs.init("rxAOh_Nj-9JcUE3NN"); // Replace with your EmailJS user ID
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const type = document.getElementById('type').value;
-            const message = document.getElementById('message').value;
-
-            const templateParams = {
-                name: name,
-                email: email,
-                message: message,
-                type: type
-            };
-
-            const templateId = 'template_dp2git5'; // Use your actual template ID here
-
-            emailjs.send('service_21588q4', templateId, templateParams)
-                .then(response => {
-                    alert(type === "suggestion" ? 'Thank you for your suggestion!' : 'Thank you for your report!');
-                    document.getElementById('feedbackForm').reset();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('There was an error submitting your feedback. Please try again later.');
-                });
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_21588q4', 'template_y2c3na4', this)
+        .then(function(response) {
+          alert('Message sent successfully.');
+        }, function(error) {
+          alert('Failed to send message.');
         });
-    </script>
+    });
+  </script>
 
 </body>
 </html>
