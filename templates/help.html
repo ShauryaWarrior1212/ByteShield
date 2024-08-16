@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Help & Support</title>
   <style>
+    /* Your existing CSS styles */
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
     body {
@@ -17,8 +18,8 @@
 
     .header {
       text-align: center;
-      padding: 50px 0;
-      font-size: 3em;
+      padding: 60px 0; /* Increased padding for more space */
+      font-size: 3.5em; /* Increased font size for better visibility */
       color: #00ffff;
       text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
       animation: glow 3s infinite;
@@ -37,20 +38,20 @@
     }
 
     .content {
-      padding: 20px;
+      padding: 40px; /* Increased padding for more space */
       max-width: 1000px;
       margin: auto;
     }
 
     .section {
-      margin-top: 40px;
+      margin-top: 60px; /* Increased top margin for more space */
     }
 
     .contact-form, .contact-info {
       background-color: #1b1b1b;
-      padding: 30px;
+      padding: 40px; /* Increased padding for more space */
       border-radius: 15px;
-      margin: 20px 0;
+      margin: 30px 0; /* Increased margin for more space */
       color: #ffffff;
       box-shadow: 0 0 15px rgb(0, 255, 234);
       animation: pulse 3s infinite;
@@ -64,13 +65,13 @@
 
     .contact-form label {
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 10px; /* Increased bottom margin for labels */
     }
 
     .contact-form input, .contact-form textarea {
       width: calc(100% - 40px);
-      padding: 10px;
-      margin: 10px 0;
+      padding: 15px; /* Increased padding for input fields */
+      margin: 15px 0; /* Increased margin for input fields */
       border: none;
       border-radius: 5px;
       background-color: #333;
@@ -81,7 +82,7 @@
       background-color: #00ffff;
       color: #000000;
       border: none;
-      padding: 15px 20px;
+      padding: 15px 25px; /* Increased padding for button */
       font-size: 1.2em;
       border-radius: 5px;
       cursor: pointer;
@@ -93,7 +94,7 @@
     }
 
     .contact-info p {
-      margin: 10px 0;
+      margin: 15px 0; /* Increased margin for paragraphs */
     }
 
     .contact-info a {
@@ -119,11 +120,11 @@
 
     .footer {
       text-align: center;
-      padding: 20px 0;
+      padding: 30px 0; /* Increased padding for footer */
       color: #555;
     }
   </style>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -163,15 +164,27 @@
   </div>
 
   <script>
-    emailjs.init("rxAOh_Nj-9JcUE3NN"); // Replace with your EmailJS user ID
+    emailjs.init("rxAOh_Nj-9JcUE3NN"); // Replace with your actual public API key
 
     document.getElementById('contact-form').addEventListener('submit', function(event) {
       event.preventDefault();
-      emailjs.sendForm('service_21588q4', 'template_y2c3na4', this)
+
+      const formData = {
+        from_name: document.getElementById('name').value,
+        from_email: document.getElementById('email').value,
+        message: document.getElementById('message').value,
+        to_email: document.getElementById('email').value, // User's email as the recipient
+      };
+
+      console.log('Form Data:', formData);
+
+      emailjs.send('service_21588q4', 'template_sn5x927', formData)
         .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
           alert('Message sent successfully.');
         }, function(error) {
-          alert('Failed to send message.');
+          console.log('FAILED...', error);
+          alert('Failed to send message. Error: ' + error.text);
         });
     });
   </script>
