@@ -1,94 +1,47 @@
-/* Base styles */
+/* General Styles */
 body {
-    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
 }
-
-/* Light theme */
-body[data-theme="light"] {
-    background: #f4f4f4;
-    color: #333;
-}
-
-/* Dark theme */
-body[data-theme="dark"] {
-    background: #333;
-    color: #f4f4f4;
-}
-
-/* Solarized theme */
-body[data-theme="solarized"] {
-    background: #fdf6e3;
-    color: #333;
-}
-
-/* Night theme */
-body[data-theme="night"] {
-    background: #2e2e2e;
-    color: #ccc;
-}
-
 
 .settings-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 30px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow: hidden;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
 }
 
 header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
-}
-
-.back-button {
-    text-decoration: none;
-    color: #007bff;
-    font-size: 28px;
-    transition: color 0.3s ease;
-}
-
-.back-button:hover {
-    color: #0056b3;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ccc;
 }
 
 h1 {
-    font-size: 28px;
     margin: 0;
-    color: #007bff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 2em;
 }
 
-/* Section Styles */
-.profile-settings,
-.account-settings,
-.notification-settings,
-.privacy-settings,
-.theme-settings,
-.security-settings,
-.account-deletion {
-    margin-bottom: 30px;
-    border-radius: 8px;
-    background: #f9f9f9;
+.back-button {
+    font-size: 1.2em;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.section {
+    background-color: #ffffff;
+    border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 h2 {
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    font-size: 22px;
-    color: #007bff;
-    font-weight: 600;
+    margin-top: 0;
+    font-size: 1.5em;
 }
 
 .form-group {
@@ -97,93 +50,43 @@ h2 {
 
 label {
     display: block;
-    font-weight: 500;
-    margin-bottom: 8px;
-    color: #555;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
-textarea,
-select {
+input, select, textarea {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    color: #333;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-textarea:focus,
-select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-textarea {
-    resize: vertical;
-}
-
-.error-message {
-    color: #e74c3c;
-    font-size: 14px;
-    margin-top: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
 }
 
 button {
     background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 12px 24px;
-    border-radius: 6px;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #0056b3;
-    transform: translateY(-2px);
 }
 
-button:active {
-    transform: translateY(0);
-}
-
-.image-preview {
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-}
-
-.image-preview img {
-    max-width: 150px;
-    max-height: 150px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Toggle Switch */
 .toggle-switch {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 40px;
-    height: 22px;
-    margin-right: 12px;
+    width: 34px;
+    height: 20px;
+    margin-left: 10px;
 }
 
 .switch input {
@@ -201,14 +104,14 @@ button:active {
     bottom: 0;
     background-color: #ccc;
     transition: .4s;
-    border-radius: 22px;
+    border-radius: 20px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 14px;
-    width: 14px;
+    height: 12px;
+    width: 12px;
     border-radius: 50%;
     left: 4px;
     bottom: 4px;
@@ -221,15 +124,34 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(18px);
+    transform: translateX(14px);
 }
 
-/* Delete Account Button */
-.account-deletion button {
-    background-color: #e74c3c;
+.image-preview {
+    margin-top: 10px;
 }
 
-.account-deletion button:hover {
-    background-color: #c0392b;
+#profile-pic-preview {
+    max-width: 150px;
+    border-radius: 10px;
 }
 
+/* Theme-specific Styles */
+body.light-theme {
+    background-color: #f0f0f0;
+}
+
+body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.solarized-theme {
+    background-color: #002b36;
+    color: #839496;
+}
+
+body.night-theme {
+    background-color: #000000;
+    color: #ffffff;
+}

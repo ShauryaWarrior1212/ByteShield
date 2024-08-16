@@ -117,6 +117,14 @@ def dashboard():
         return render_template('dashboard.html', username=session['username'], email=session['email'])
     else:
         return redirect(url_for('index'))
+    
+@app.route('/tutorial')
+def tutorial():
+    return render_template('tutorial.html')
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
 
 @app.route('/tools')
 def tools_page():

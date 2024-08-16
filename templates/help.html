@@ -5,42 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suggestions & Reports</title>
     <style>
-        /* Basic styles for layout and design */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'Roboto Mono', monospace;
+            background-color: #2e2e2e;
+            color: #ffffff;
+            overflow-x: hidden;
         }
 
         .header {
-            background-color: #007BFF;
-            color: white;
-            padding: 20px;
             text-align: center;
-            width: 100%;
+            padding: 50px 0;
+            font-size: 3em;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            animation: glow 3s infinite;
         }
 
         .content {
             padding: 20px;
-            max-width: 600px;
-            width: 100%;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            margin: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .section {
+            margin-top: 40px;
         }
 
         .form-container {
-            margin-top: 20px;
+            background-color: #1b1b1b;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgb(0, 255, 234);
+            animation: pulse 3s infinite;
         }
 
         .form-container h3 {
+            color: #00ffff;
             margin-top: 0;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
         }
 
         form {
@@ -53,45 +61,71 @@
         }
 
         input, select, textarea {
-            margin-bottom: 15px;
             padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1em;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #ffffff;
         }
 
         button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
+            background-color: #00ffff;
+            color: #000000;
             border: none;
-            border-radius: 4px;
-            font-size: 1em;
+            padding: 15px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
             cursor: pointer;
+            text-transform: uppercase;
             transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #00cccc;
         }
 
         .footer {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px;
             text-align: center;
+            padding: 20px 0;
+            color: #555;
+            background-color: #1b1b1b;
+            position: fixed;
             width: 100%;
-            position: absolute;
             bottom: 0;
         }
 
         .footer a {
-            color: #e0e0e0;
+            color: #00ffff;
             text-decoration: none;
         }
 
         .footer a:hover {
             text-decoration: underline;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            }
+            50% {
+                text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+            }
+            100% {
+                text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            }
         }
     </style>
 </head>
@@ -131,9 +165,9 @@
     </div>
 
     <!-- Load EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        emailjs.init("rxAOh_Nj-9JcUE3NN"); // Replace with your public API key
+        emailjs.init("IMvRAEfpKrlBYQh4y"); // Replace with your public API key
 
         document.getElementById('feedbackForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -143,9 +177,6 @@
             const type = document.getElementById('type').value;
             const message = document.getElementById('message').value;
 
-            // Set template ID based on feedback type
-            const templateId = type === "suggestion" ? 'template_dp2git5' : 'template_dp2git5'; // Use the same template if only one is allowed
-
             const templateParams = {
                 name: name,
                 email: email,
@@ -153,9 +184,10 @@
                 type: type
             };
 
+            const templateId = 'template_dp2git5'; // Use your actual template ID here
+
             emailjs.send('service_21588q4', templateId, templateParams)
                 .then(response => {
-                    console.log('Success:', response);
                     alert(type === "suggestion" ? 'Thank you for your suggestion!' : 'Thank you for your report!');
                     document.getElementById('feedbackForm').reset();
                 })

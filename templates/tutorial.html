@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cybersecurity Info Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #1b1b1b;
+      color: #ff0000;
+      font-family: 'Roboto Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    .header {
+      text-align: center;
+      padding: 50px 0;
+      font-size: 3em;
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+      animation: glow 3s infinite;
+    }
+
+    .content {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .news-article, .guide, .tip, .tool, .resource, .tutorial {
+      background-color: #111;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      animation: guideGlow 3s infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section h2 {
+      color: #ff0000;
+      text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+      animation: glow 3s infinite;
+    }
+
+    @keyframes guideGlow {
+      0% {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      }
+      50% {
+        text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
+      }
+      100% {
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      }
+    }
+
+    .news-article h3, .guide h3, .tip h3, .tool h3, .resource h3, .tutorial h3 {
+      margin-top: 0;
+    }
+
+    .glow-box:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shine 2s infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        left: -100%;
+      }
+      50% {
+        left: 100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px 0;
+      color: #555;
+    }
+
+    a {
+      color: #ff0000;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Tutorials</div>
+
+  <div class="content">
+    <h2>Introduction</h2>
+    <p>Cybersecurity involves protecting computer systems and networks from information disclosure, theft of or damage to their hardware, software, or electronic data. It's crucial in today's digital age.</p>
+
+    <div class="section">
+      <h2>Latest Cybersecurity & Cybercrime News</h2>
+      <div class="news-section" id="news-section">
+        <!-- News articles will be injected here by JavaScript -->
+      </div>
+    </div>
+
+    <div class="section guide-section">
+      <h2>Advanced Cybersecurity Guides</h2>
+      <div class="guide glow-box">
+        <h3>1. How to Set Up a Secure Firewall</h3>
+        <p>Learn how to configure a firewall to protect your network from unauthorized access and cyber threats.</p>
+      </div>
+      <div class="guide glow-box">
+        <h3>2. Implementing Multi-Factor Authentication (MFA)</h3>
+        <p>Understand the importance of MFA and how to implement it to add an extra layer of security to your accounts.</p>
+      </div>
+      <div class="guide glow-box">
+        <h3>3. Encrypting Your Data for Maximum Security</h3>
+        <p>Explore the best practices for encrypting sensitive data to prevent unauthorized access and data breaches.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Essential Cybersecurity Tips</h2>
+      <div class="tip glow-box">
+        <h3>1. Regularly Update Your Software</h3>
+        <p>Keeping your software up-to-date helps protect your system from vulnerabilities and exploits that hackers may use.</p>
+      </div>
+      <div class="tip glow-box">
+        <h3>2. Use Strong, Unique Passwords</h3>
+        <p>Always use strong passwords that combine letters, numbers, and symbols. Avoid using the same password across multiple sites.</p>
+      </div>
+      <div class="tip glow-box">
+        <h3>3. Be Wary of Phishing Scams</h3>
+        <p>Don't click on links or download attachments from unknown or suspicious emails to avoid falling victim to phishing scams.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Recommended Cybersecurity Tools</h2>
+      <div class="tool glow-box">
+        <h3>1. Bitdefender Antivirus</h3>
+        <p>Bitdefender provides top-notch protection against malware, ransomware, and other cyber threats.</p>
+      </div>
+      <div class="tool glow-box">
+        <h3>2. ExpressVPN</h3>
+        <p>A highly secure VPN service that keeps your online activities private and encrypted.</p>
+      </div>
+      <div class="tool glow-box">
+        <h3>3. LastPass Password Manager</h3>
+        <p>Store your passwords securely and generate strong passwords with LastPass, a trusted password manager.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Cybersecurity Tutorials</h2>
+      <div class="tutorial glow-box">
+        <h3>1. Setting Up a Secure VPN</h3>
+        <p>In this tutorial, you'll learn how to set up and configure a secure Virtual Private Network (VPN) to protect your online privacy and safeguard your data. The guide will walk you through selecting a reliable VPN service, configuring it on different devices, and ensuring your connection is encrypted and secure.</p>
+      </div>
+      <div class="tutorial glow-box">
+        <h3>2. Encrypting Sensitive Files</h3>
+        <p>This tutorial will teach you how to use encryption tools to secure your sensitive files from unauthorized access. You'll learn about various encryption methods, the importance of choosing strong encryption keys, and how to encrypt files on both your local machine and cloud storage.</p>
+      </div>
+      <div class="tutorial glow-box">
+        <h3>3. Conducting a Penetration Test</h3>
+        <p>Conducting a penetration test is essential for identifying and fixing vulnerabilities in your network. This tutorial will guide you through the steps of performing a penetration test, from reconnaissance to exploitation, and provide you with the tools and techniques needed to protect your systems from potential attackers.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Useful Cybersecurity Resources</h2>
+      <div class="resource glow-box">
+        <h3>1. OWASP Top 10</h3>
+        <p>The OWASP Top 10 is a standard awareness document for developers and web application security.</p>
+      </div>
+      <div class="resource glow-box">
+        <h3>2. NIST Cybersecurity Framework</h3>
+        <p>The NIST Cybersecurity Framework provides guidelines for improving the security and resilience of your network.</p>
+      </div>
+      <div class="resource glow-box">
+        <h3>3. Cybersecurity and Infrastructure Security Agency (CISA)</h3>
+        <p>CISA offers a wide range of resources and guidelines for securing your systems and infrastructure.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    &copy; ByteShield | <a href="#">Learn More</a>
+  </div>
+
+  <script>
+    const apiKey = 'a0a92e8cbd694ad0b9d98f701a7d8375';
+    const newsSection = document.getElementById('news-section');
+
+    async function fetchCybersecurityNews() {
+      const url = `https://newsapi.org/v2/everything?q=hacking OR cybersecurity OR cybercrime&language=en&sortBy=publishedAt&pageSize=3&apiKey=${apiKey}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      return data.articles;
+    }
+
+    function displayNews(articles) {
+      articles.forEach(article => {
+        const articleDiv = document.createElement('div');
+        articleDiv.className = 'news-article glow-box';
+        articleDiv.innerHTML = `
+          <h3>${article.title}</h3>
+          <p>${article.description}</p>
+        `;
+        newsSection.appendChild(articleDiv);
+      });
+    }
+
+    fetchCybersecurityNews()
+      .then(displayNews)
+      .catch(error => {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'news-article';
+        errorDiv.textContent = 'Failed to fetch news. Please try again later.';
+        newsSection.appendChild(errorDiv);
+      });
+  </script>
+</body>
+</html>
