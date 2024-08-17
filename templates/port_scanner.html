@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Port Scanner</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            background: linear-gradient(135deg, #00FFFF, #ADD8E6, #000000);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .container {
+            position: relative;
+            max-width: 400px;
+            width: 100%;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            animation: containerFadeIn 1s ease-out;
+        }
+
+        @keyframes containerFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #00FFFF;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0, 255, 255, 1);
+            }
+        }
+
+        input, button {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, button:focus {
+            outline: none;
+            background-color: #444;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+        }
+
+        button {
+            background-color: #00FFFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #00cccc;
+            transform: scale(1.05);
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #00FFFF;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        li {
+            background: rgba(0, 0, 0, 0.8);
+            margin: 5px 0;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .error {
+            color: #f44336;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Port Scanner</h1>
+        <form method="POST">
+            <input type="text" name="target" placeholder="Enter target (e.g., 127.0.0.1)" required>
+            <input type="number" name="start_port" placeholder="Start Port" value="1" min="1" required>
+            <input type="number" name="end_port" placeholder="End Port" value="1024" max="65535" required>
+            <button type="submit">Scan Ports</button>
+        </form>
+
+        {% if target %}
+            <h2>Scanning Target: {{ target }}</h2>
+            {% if error_message %}
+                <p class="error">{{ error_message }}</p>
+            {% elif open_ports %}
+                <ul>
+                    {% for port in open_ports %}
+                        <li>Port {{ port }} is open</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No open ports found.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

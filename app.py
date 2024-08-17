@@ -8,6 +8,9 @@ import random
 import time
 import os
 import nmap
+import socket
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
 import base64
 from logging.handlers import RotatingFileHandler
 
@@ -356,6 +359,46 @@ def faq():
         filtered_faqs = faqs
 
     return render_template("faq.html", faqs=filtered_faqs, query=query)
+
+# Function to check a single port
+def check_port(target, port):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    socket.setdefaulttimeout(1)
+    result = s.connect_ex((target, port))
+    s.close()
+    if result == 0:
+        return port
+    return None
+
+# Scan ports using concurrency
+def scan_ports(target, start_port, end_port):
+    open_ports = []
+    with ThreadPoolExecutor(max_workers=100) as executor:
+        futures = [executor.submit(check_port, target, port) for port in range(start_port, end_port + 1)]
+        for future in futures:
+            port = future.result()
+            if port:
+                open_ports.append(port)
+    return open_ports
+
+@app.route("/port_scanner", methods=["GET", "POST"])
+def port_scanner():
+    open_ports = []
+    target = None
+    error_message = None
+    
+    if request.method == "POST":
+        try:
+            target = socket.gethostbyname(request.form["target"])
+            start_port = int(request.form.get("start_port", 1))
+            end_port = int(request.form.get("end_port", 1024))
+            open_ports = scan_ports(target, start_port, end_port)
+        except socket.gaierror:
+            error_message = "Hostname Could Not Be Resolved"
+        except Exception as e:
+            error_message = f"Error: {e}"
+
+    return render_template("port_scanner.html", open_ports=open_ports, target=target, error_message=error_message)
 
 if __name__ == '__main__':
     app.run(debug=True)
